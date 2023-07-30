@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authy.API", "Authy.API\Auth
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authy.Data", "Authy.Data\Authy.Data.csproj", "{C3345C87-4A75-4AC8-B168-FD180BE6AF0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authy.Tests", "Authy.Tests\Authy.Tests.csproj", "{BC20A943-2A3C-4CB0-B330-CE0CFC73FEE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authy.Tests", "Authy.Tests\Authy.Tests.csproj", "{BC20A943-2A3C-4CB0-B330-CE0CFC73FEE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authy.Domain", "Authy.Domain\Authy.Domain.csproj", "{B19280F8-C4E9-4DA6-A5B1-F09B331909C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authy.Common", "Authy.Common\Authy.Common.csproj", "{34EBB329-CA7C-48C0-816A-577AF2D68DDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{BC20A943-2A3C-4CB0-B330-CE0CFC73FEE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC20A943-2A3C-4CB0-B330-CE0CFC73FEE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC20A943-2A3C-4CB0-B330-CE0CFC73FEE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B19280F8-C4E9-4DA6-A5B1-F09B331909C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B19280F8-C4E9-4DA6-A5B1-F09B331909C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B19280F8-C4E9-4DA6-A5B1-F09B331909C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B19280F8-C4E9-4DA6-A5B1-F09B331909C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34EBB329-CA7C-48C0-816A-577AF2D68DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EBB329-CA7C-48C0-816A-577AF2D68DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34EBB329-CA7C-48C0-816A-577AF2D68DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34EBB329-CA7C-48C0-816A-577AF2D68DDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

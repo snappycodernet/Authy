@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Authy.Domain.Interfaces;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,9 +9,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Authy.Data.Services
+namespace Authy.Domain.Services
 {
-    public class SecurityService
+    public class SecurityService : ISecurityService
     {
         const int keySize = 64;
         const int iterations = 350000;
@@ -35,11 +36,11 @@ namespace Authy.Data.Services
             return CryptographicOperations.FixedTimeEquals(hashToCompare, Convert.FromHexString(hash));
         }
 
-        public string GenerateToken(string issuer, string audience, string secretKey, List<Claim> claims, DateTime? expirationDate)
+        public JwtSecurityToken GenerateToken(string issuer, string audience, string secretKey, List<Claim> claims, DateTime? expirationDate)
         {
             var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var signinCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
-            var tokeOptions = new JwtSecurityToken(
+            var token = new JwtSecurityToken(
                 issuer: issuer,
                 audience: audience,
                 claims: claims ?? new List<Claim>(),
@@ -47,7 +48,12 @@ namespace Authy.Data.Services
                 signingCredentials: signinCredentials
             );
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            return token;
+        }
+
+        public string EncodeToken(JwtSecurityToken token)
+        {
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
             return tokenString;
         }

@@ -1,4 +1,4 @@
-using Authy.Data.Services;
+using Authy.Domain.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -46,7 +46,9 @@ namespace Authy.Tests
 
             Assert.IsNotNull(token);
 
-            var decodedToken = svc.DecodeToken(token);
+            var encodedToken = svc.EncodeToken(token);
+
+            var decodedToken = svc.DecodeToken(encodedToken);
 
             Assert.IsTrue(decodedToken.Claims.Any());
 

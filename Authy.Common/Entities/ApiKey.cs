@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Authy.Data.Models
+namespace Authy.Common.Entities
 {
     public class ApiKey
     {

@@ -10,8 +10,4 @@
     <PackageReference Include="ServiceStack.OrmLite.SqlServer.Data" Version="6.9.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Authy.Common\Authy.Common.csproj" />
-  </ItemGroup>
-
 </Project>

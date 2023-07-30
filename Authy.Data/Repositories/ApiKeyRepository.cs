@@ -1,5 +1,6 @@
 ﻿using Authy.Data.Interfaces;
-using Authy.Data.Models;
+using Authy.Common.Entities;
+using Authy.Data.Interfaces;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
@@ -22,7 +23,7 @@ namespace Authy.Data.Repositories
 
         public async Task<ApiKey> CreateAsync(ApiKey entity)
         {
-            using (var db = _db.CreateDbConnection())
+            using (var db = _db.OpenDbConnection())
             {
                 await db.SaveAsync(entity);
 
@@ -32,7 +33,7 @@ namespace Authy.Data.Repositories
 
         public async Task DeleteAsync(string id)
         {
-            using(var db = _db.CreateDbConnection())
+            using (var db = _db.OpenDbConnection())
             {
                 await db.DeleteByIdAsync<ApiKey>(id);
             }
@@ -40,7 +41,7 @@ namespace Authy.Data.Repositories
 
         public async Task DeleteAsync(ApiKey entity)
         {
-            using (var db = _db.CreateDbConnection())
+            using (var db = _db.OpenDbConnection())
             {
                 await db.DeleteAsync(entity);
             }
@@ -48,7 +49,7 @@ namespace Authy.Data.Repositories
 
         public async Task<IEnumerable<ApiKey>> FindAllAsync()
         {
-            using (var db = _db.CreateDbConnection())
+            using (var db = _db.OpenDbConnection())
             {
                 var keys = await db.LoadSelectAsync(db.From<ApiKey>());
 
@@ -58,7 +59,7 @@ namespace Authy.Data.Repositories
 
         public async Task<IEnumerable<ApiKey>> FindByConditionAsync(Expression<Func<ApiKey, bool>> condition)
         {
-            using (var db = _db.CreateDbConnection())
+            using (var db = _db.OpenDbConnection())
             {
                 var keys = await db.LoadSelectAsync<ApiKey>(condition);
 
@@ -68,7 +69,7 @@ namespace Authy.Data.Repositories
 
         public async Task<ApiKey> FindByIdAsync(string id)
         {
-            using(var db = _db.CreateDbConnection())
+            using (var db = _db.OpenDbConnection())
             {
                 var key = await db.LoadSingleByIdAsync<ApiKey>(id);
 
@@ -78,7 +79,7 @@ namespace Authy.Data.Repositories
 
         public async Task<ApiKey> UpdateAsync(string id, ApiKey entity)
         {
-            using (var db = _db.CreateDbConnection())
+            using (var db = _db.OpenDbConnection())
             {
                 var existingKey = await FindByIdAsync(id);
                 existingKey.UserAuthId = entity.UserAuthId;

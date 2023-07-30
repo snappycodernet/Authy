@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Authy.Common\Authy.Common.csproj" />
     <ProjectReference Include="..\Authy.Data\Authy.Data.csproj" />
+    <ProjectReference Include="..\Authy.Domain\Authy.Domain.csproj" />
   </ItemGroup>
 
 </Project>

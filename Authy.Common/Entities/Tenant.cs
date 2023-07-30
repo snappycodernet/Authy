@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Authy.Data.Models
+namespace Authy.Common.Entities
 {
+    [Schema("common")]
     public class Tenant
     {
         [AutoIncrement]

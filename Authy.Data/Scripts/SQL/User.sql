@@ -21,7 +21,7 @@ CREATE TABLE [dbo].[User]
 	[PIN]                   NVARCHAR(50),
 	[PasswordHash]          NVARCHAR(200),
 	[IsActive]              BIT NOT NULL,
-	[Salt]                  NVARCHAR(40)
+	[Salt]                  NVARCHAR(125)
         CONSTRAINT [DF_User_Salt] DEFAULT NEWID(),
 	[LastModifiedUserId]    BIGINT,
 	[CreatedTimestamp]      DATETIME
@@ -31,7 +31,7 @@ CREATE TABLE [dbo].[User]
 	CONSTRAINT [PK_User]
 		PRIMARY KEY CLUSTERED ([TenantId], [Id]),
 	CONSTRAINT [FK_User_TenantId]
-		FOREIGN KEY ([TenantId]) REFERENCES [dbo].[Tenant],
+		FOREIGN KEY ([TenantId]) REFERENCES [common].[Tenant],
 );
 
 CREATE UNIQUE INDEX [UNIQ_User_Email]
@@ -54,5 +54,5 @@ CREATE TABLE [dbo].[ApiKey]
 	[Meta]          NVARCHAR(200),
 	CONSTRAINT [PK_ApiKey] PRIMARY KEY CLUSTERED ([TenantId], [Id]),
 	CONSTRAINT [FK_ApiKey_TenantId]
-		FOREIGN KEY ([TenantId]) REFERENCES [dbo].[Tenant],
+		FOREIGN KEY ([TenantId]) REFERENCES [common].[Tenant],
 );
