@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Authy.Data.Repositories
 {
-    public class ApiKeyRepository : IAsyncRepository<ApiKey, string>
+    public class ApiKeyRepository : IAsyncRepository<ApiKey, long>
     {
         IDbConnectionFactory _db;
 
@@ -31,7 +31,7 @@ namespace Authy.Data.Repositories
             }
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(long id)
         {
             using (var db = _db.OpenDbConnection())
             {
@@ -67,7 +67,7 @@ namespace Authy.Data.Repositories
             }
         }
 
-        public async Task<ApiKey> FindByIdAsync(string id)
+        public async Task<ApiKey> FindByIdAsync(long id)
         {
             using (var db = _db.OpenDbConnection())
             {
@@ -77,20 +77,15 @@ namespace Authy.Data.Repositories
             }
         }
 
-        public async Task<ApiKey> UpdateAsync(string id, ApiKey entity)
+        public async Task<ApiKey> UpdateAsync(long id, ApiKey entity)
         {
             using (var db = _db.OpenDbConnection())
             {
                 var existingKey = await FindByIdAsync(id);
-                existingKey.UserAuthId = entity.UserAuthId;
-                existingKey.Environment = entity.Environment;
-                existingKey.KeyType = entity.KeyType;
-                existingKey.ExpiryDate = entity.ExpiryDate;
                 existingKey.CancelledDate = entity.CancelledDate;
                 existingKey.Notes = entity.Notes;
                 existingKey.RefIdStr = entity.RefIdStr;
                 existingKey.RefId = entity.RefId;
-                existingKey.Meta = entity.Meta;
 
                 db.Update(existingKey);
 

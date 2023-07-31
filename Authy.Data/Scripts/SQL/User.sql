@@ -40,8 +40,8 @@ CREATE UNIQUE INDEX [UNIQ_User_Email]
 CREATE TABLE [dbo].[ApiKey]
 (
 	[TenantId]      INT	NOT NULL,
-	[Id]            NVARCHAR(200) NOT NULL,
-	[UserAuthId]    NVARCHAR(50) NOT NULL,
+	[Id]            BIGINT IDENTITY,
+	[UserAuthId]    BIGINT NOT NULL,
 	[Environment]   NVARCHAR(50),
 	[KeyType]       NVARCHAR(50),
 	[CreatedDate]   DATETIME
@@ -49,10 +49,13 @@ CREATE TABLE [dbo].[ApiKey]
 	[ExpiryDate]    DATETIME,
 	[CancelledDate] DATETIME,
 	[Notes]         NVARCHAR(2000),
-	[RefIdStr]      NVARCHAR(200),
+	[RefIdStr]      NVARCHAR(MAX),
 	[RefId]         INT,
 	[Meta]          NVARCHAR(200),
 	CONSTRAINT [PK_ApiKey] PRIMARY KEY CLUSTERED ([TenantId], [Id]),
 	CONSTRAINT [FK_ApiKey_TenantId]
 		FOREIGN KEY ([TenantId]) REFERENCES [common].[Tenant],
 );
+
+CREATE INDEX [ApiKey_UserAuthId]
+	ON [dbo].[ApiKey] ([TenantId], [UserAuthId]);

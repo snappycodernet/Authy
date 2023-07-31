@@ -44,6 +44,7 @@ namespace Authy.Domain.Services
                 issuer: issuer,
                 audience: audience,
                 claims: claims ?? new List<Claim>(),
+                notBefore: DateTime.UtcNow,
                 expires: expirationDate ?? DateTime.UtcNow.AddDays(14),
                 signingCredentials: signinCredentials
             );
