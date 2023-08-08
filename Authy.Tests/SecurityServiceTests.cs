@@ -2,6 +2,7 @@ using Authy.Domain.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace Authy.Tests
 {
@@ -56,6 +57,23 @@ namespace Authy.Tests
 
             Assert.IsNotNull(givenNameClaim);
             Assert.AreEqual("Fred", givenNameClaim.Value);
+        }
+
+        [TestMethod]
+        public void TestPasswordResetTokenGeneration()
+        {
+            var svc = new SecurityService();
+            long userId = new Random().NextInt64();
+            var privateKey = "aardvarktwoseven dgh dfgh d65yu d56uy6drtyhdrtyu d65u 5ujd56 udrthd rtyudryt";
+
+            var code = svc.CreatePasswordResetHmacCode(userId, privateKey);
+
+            var success = svc.VerifyPasswordResetHmacCode(code, privateKey, out long? userIdFromToken);
+
+            Assert.IsNotNull(code);
+            Assert.IsNotNull(userIdFromToken);
+            Assert.IsTrue(success);
+            Assert.AreEqual(userId, userIdFromToken.Value);
         }
     }
 }
